@@ -16,6 +16,17 @@ export default function App() {
     fetchTodos();
   }, []);
 
+  // ✅ Backend keep-alive ping
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetch("https://florida-backend.onrender.com/api/todos/health")
+        .then(() => console.log("✅ Backend pinged"))
+        .catch(() => console.log("❌ Ping failed"));
+    }, 5 * 60 * 1000); // every 5 minutes
+
+    return () => clearInterval(interval);
+  }, []);
+
   const addTodo = async (todo) => {
     const res = await api.post("/todos", todo);
     setTodos([res.data.data, ...todos]);
@@ -32,13 +43,13 @@ export default function App() {
   };
 
   return (
-    <div className="app-bg">   {/* 👈 background class yaha lagao */}
-    <div className="app-wrapper">
-      <h1 className="app-title">✅ My Animated Todo List</h1>
-      <p className="app-subtitle">Organize your tasks with style ✨</p>
-      <TodoForm onCreate={addTodo} />
-      <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+    <div className="app-bg">
+      <div className="app-wrapper">
+        <h1 className="app-title">✅ My Animated Todo List</h1>
+        <p className="app-subtitle">Organize your tasks with style ✨</p>
+        <TodoForm onCreate={addTodo} />
+        <TodoList todos={todos} onToggle={toggleTodo} onDelete={deleteTodo} />
+      </div>
     </div>
-  </div>
   );
 }

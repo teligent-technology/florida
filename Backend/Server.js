@@ -19,6 +19,10 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.use("/api/todos", todoRoutes);
+app.get("/api/todos/health", (req, res) => {
+  res.json({ status: "ok", message: "Backend is alive 🚀" });
+});
+
 
 const PORT = process.env.PORT || 5000;
 
