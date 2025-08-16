@@ -1,0 +1,20 @@
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.empty-msg {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 20px;
+  border-radius: 12px;
+  color: #94a3b8;
+  background: linear-gradient(135deg, #0f172a, #1e293b);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
