@@ -7,7 +7,14 @@ const morgan = require("morgan");
 const todoRoutes = require("./routes/todos");
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "https://florida-frontend.onrender.com", // ✅ sirf aapke frontend ka link allow hoga
+  methods: "GET,POST,PUT,PATCH,DELETE",
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(morgan("dev"));
 
